@@ -11,7 +11,7 @@ const HeaderFooter = ({ children }: Props) => {
   return (
     <>
       {/* header */}
-      <header className=" bg-cultured">
+      <header className=" mb-16 bg-cultured">
         <div className="mx-auto  flex max-w-7xl  justify-between py-5 px-16">
           <h1 className="">Logo</h1>
           <h1 className="hidden sm:inline-flex">
