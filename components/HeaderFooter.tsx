@@ -18,7 +18,7 @@ const HeaderFooter = ({ children }: Props) => {
             <span className="pr-2">(415) 810.9777</span> /{' '}
             <span className="pl-2">andrewdaotran@gmail.com</span>
           </h1>
-          <h1 className="">About Me</h1>
+          <h1 className="">about me</h1>
         </div>
       </header>
       {children}
@@ -71,10 +71,12 @@ const HeaderFooter = ({ children }: Props) => {
           </div>
         </div>
         {/* email div */}
-        <div className="flex  items-center justify-center space-x-2 pb-14 text-center text-white">
+        <div className=" flex  items-center justify-center space-x-2 pb-14 text-center text-white">
           {/* <Mail /> */}
-          <MailIcon className=" h-4  w-4 text-gamboge" />
-          <h3 className="">andrewdaotran@gmail.com</h3>
+          <MailIcon className=" h-4  w-4 text-gamboge " />
+          <h3 className="transition ease-in-out hover:cursor-pointer hover:text-gamboge">
+            andrewdaotran@gmail.com
+          </h3>
         </div>
       </footer>
     </>

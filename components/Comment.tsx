@@ -8,9 +8,9 @@ interface Props {
 
 const Comment = () => {
   return (
-    <div className="">
+    <div className=" border-b  pb-4">
       <div className="mb-2 grid grid-cols-2 font-bold">
-        <h3 className="cols-span-1 ">
+        <h3 className="cols-span-1 text-gamboge">
           Andrew Tran
           {/* {name} */}
         </h3>

@@ -1,4 +1,5 @@
-import { ArrowCircleRightIcon } from '@heroicons/react/outline'
+import { MoreButton } from './MoreButton'
+
 import React from 'react'
 
 interface Props {
@@ -35,16 +36,7 @@ const BlogPreview = () => {
           ducimus illum!
           {/* {description} */}
         </p>
-        {/* Read More Button Div */}
-        <div className=" group flex w-fit cursor-pointer items-center space-x-4 ">
-          <button
-            className="   font-bold transition ease-in-out group-hover:text-gamboge"
-            // onclick={readMore}
-          >
-            Read More
-          </button>
-          <ArrowCircleRightIcon className="h-4 w-4 transition ease-in-out group-hover:text-gamboge" />
-        </div>
+        <MoreButton buttonText="read more" />
       </div>
     </div>
   )
