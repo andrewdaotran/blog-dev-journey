@@ -1,6 +1,7 @@
 import { MoreButton } from './MoreButton'
 
 import React from 'react'
+import Image from 'next/image'
 
 interface Props {
   title: string
@@ -13,14 +14,20 @@ interface Props {
 const BlogPreview = () => {
   return (
     <div className=" space-y-4 ">
-      <img
-        src="/robert.jpg"
-        // src={`${image}`}
-        alt=""
-        className={`   h-[23rem]  w-full  object-cover object-top`}
-        // ${imagePosition}
-      />
-      {/* </div> */}
+      <div className={`  relative h-[23rem]  w-full`}>
+        {/* ${imagePosition} */}
+        <Image
+          src="/robert.jpg"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
+          // src={`${image}`}
+          alt=""
+
+          // ${imagePosition}
+        />
+      </div>
+
       <div className="space-y-4">
         <p className="text-sm">
           11 December 2021

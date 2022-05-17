@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 import { MoreButton } from './MoreButton'
 
@@ -11,11 +12,20 @@ interface Props {
 const RecentPost = () => {
   return (
     <div className="ml-6 mr-4 grid  gap-2 border-b-2 border-black py-8">
-      <img
-        src="/robert.jpg"
-        // src={image}
-        className=" h-14 w-14 rounded-full object-cover"
-      />
+      <div className={`  relative h-14  w-14`}>
+        {/* ${imagePosition} */}
+        <Image
+          src="/robert.jpg"
+          layout="fill"
+          objectFit="cover"
+          objectPosition="top"
+          // src={`${image}`}
+          alt=""
+          className="rounded-full"
+
+          // ${imagePosition}
+        />
+      </div>
       <p className="text-sm">
         11 December 2021
         {/* {date} */}
