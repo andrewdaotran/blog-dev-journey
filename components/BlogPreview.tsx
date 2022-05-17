@@ -36,7 +36,7 @@ const BlogPreview = () => {
           ducimus illum!
           {/* {description} */}
         </p>
-        <MoreButton buttonText="read more" />
+        <MoreButton buttonText="read more" more="/blog-posts/h" />
       </div>
     </div>
   )

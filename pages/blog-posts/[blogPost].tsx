@@ -9,7 +9,7 @@ interface Props {
 
 const BlogPost = () => {
   return (
-    <div className="mx-6 ">
+    <div className="mx-6 my-12">
       <div className="mx-auto max-w-7xl  md:grid md:grid-cols-3">
         <div className="mr-6 md:col-span-2">
           <p className="mx-auto mb-6 text-sm">11 December 2021 / 3:41 pm</p>

@@ -28,7 +28,7 @@ const RecentPost = () => {
         Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam ut illo
         ad reiciendis quidem dignissimos?
       </p>
-      <MoreButton buttonText="read more" />
+      <MoreButton buttonText="read more" more="/blog-posts/h" />
     </div>
   )
 }

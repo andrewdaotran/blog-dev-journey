@@ -25,7 +25,7 @@ const BlogSection = ({ last }: Props) => {
         {/* Blog Content Single Box */}
         <div className=" flex h-fit flex-col space-y-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs">
           <h3 className="text-3xl font-bold">
-            content
+            web development.
             {/* {title} */}
           </h3>
           <p className="">
@@ -33,7 +33,7 @@ const BlogSection = ({ last }: Props) => {
             veritatis eveniet necessitatibus quod aut! Ipsa!
             {/* {description} */}
           </p>
-          <MoreButton buttonText="check all" />
+          <MoreButton buttonText="check all" more="/blog-posts" />
         </div>
         {/* Array of blog posts */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:col-span-2">
