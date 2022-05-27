@@ -21,7 +21,19 @@ export default {
       name: 'author',
       title: 'Author',
       type: 'reference',
-      to: {type: 'author'},
+      to: { type: 'author' },
+    },
+    {
+      name: 'category',
+      title: 'Category',
+      type: 'string',
+      options: {
+        list: [
+          { value: 'webDevelopment', title: 'Web Development' },
+          { value: 'dayInTheLife', title: 'Day In The Life' },
+          { value: 'stenography', title: 'Stenography' },
+        ],
+      },
     },
     {
       name: 'mainImage',
@@ -32,15 +44,34 @@ export default {
       },
     },
     {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      name: 'imagePosition',
+      title: 'Image Position',
+      type: 'string',
+      options: {
+        list: [
+          { value: 'center', title: 'Center' },
+          { value: 'top', title: 'Top' },
+          { value: 'bottom', title: 'Bottom' },
+          { value: 'right', title: 'Right' },
+          { value: 'left', title: 'Left' },
+        ],
+      },
     },
+    // {
+    //   name: 'categories',
+    //   title: 'Categories',
+    //   type: 'array',
+    //   of: [{ type: 'reference', to: { type: 'category' } }],
+    // },
     {
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
     },
     {
       name: 'body',
@@ -56,7 +87,7 @@ export default {
       media: 'mainImage',
     },
     prepare(selection) {
-      const {author} = selection
+      const { author } = selection
       return Object.assign({}, selection, {
         subtitle: author && `by ${author}`,
       })

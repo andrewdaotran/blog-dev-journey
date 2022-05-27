@@ -1,8 +1,6 @@
-import {
-  createImageUrlBuilder,
-  createCurrentUserHook,
-  createClient
-} from 'next-sanity'
+import { createCurrentUserHook, createClient } from 'next-sanity'
+// import createImageUrlBuilder from '@sanity/image-url'
+import imageUrlBuilder from '@sanity/image-url'
 
 export const config = {
   /**
@@ -21,4 +19,14 @@ export const config = {
    * Authenticated request (like preview) will always bypass the CDN
    **/
   useCdn: process.env.NODE_ENV === 'production',
+}
+
+export const sanityClient = createClient(config)
+
+// export const urlFor = (source) => createImageUrlBuilder(config).image(source)
+
+const builder = imageUrlBuilder(sanityClient)
+
+export const urlFor = (source) => {
+  return builder.image(source)
 }
