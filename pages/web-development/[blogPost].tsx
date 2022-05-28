@@ -1,10 +1,12 @@
 import { GetStaticProps } from 'next'
 import { groq } from 'next-sanity'
+import Image from 'next/image'
 import React from 'react'
+import PortableText from 'react-portable-text'
 import BackButton from '../../components/BackButton'
 import CommentSection from '../../components/CommentSection'
 import Sidebar from '../../components/Sidebar'
-import { sanityClient } from '../../sanity'
+import { sanityClient, urlFor } from '../../sanity'
 import { Post, Slug } from '../../typings'
 
 interface Props {
@@ -12,34 +14,82 @@ interface Props {
   sidebarPosts: Post[]
 }
 
-const BlogPostWebDev = ({
-  post: {
-    _id,
-    _createdAt,
-    author,
-    body,
-    description,
-    slug,
-    title,
-    mainImage,
-    category,
-    imagePosition,
-  },
-  sidebarPosts,
-}: Props) => {
+const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
   const navigateBackTo = `/web-development`
   const navigateWords = 'web development'
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
       <div className="mx-auto max-w-7xl md:grid md:grid-cols-3">
-        <div className="mr-6 md:col-span-2">
-          <p className="mx-auto mb-6 text-sm">11 December 2021 / 3:41 pm</p>
-
-          <h3 className="mb-6 text-6xl sm:text-[5rem]">{title}</h3>
-          {/* <div className="">{body}</div> */}
+        <article className="mr-6 md:col-span-2">
+          <p className="mx-auto mb-6  font-extralight">
+            <span className="text-gray-400">published at</span>{' '}
+            {`${new Date(post._createdAt).getDate()} ${new Date(
+              post._createdAt
+            ).toLocaleString('en-US', { month: 'long' })} ${new Date(
+              post._createdAt
+            ).getFullYear()} / `}
+            {/* 11 December 2021 / 3:41 pm */}
+          </p>
+          {/* Author bubble, name, and date div */}
+          <div className="flex items-center space-x-2">
+            {/* Author bubble */}
+            <div className="relative h-10 w-10 ">
+              <Image
+                src={urlFor(post.mainImage).url()}
+                layout="fill"
+                objectFit="cover"
+                objectPosition={post.imagePosition}
+                alt="blog post main image"
+                className="rounded-full"
+              />
+            </div>
+            {/* Author name and date */}
+            <h3 className="text-sm font-extralight">
+              <span className="text-gray-400">written by </span>
+              {post.author.name.toLowerCase()}{' '}
+              <span className="text-gray-400">- published at</span>{' '}
+              {new Date(post._createdAt).toLocaleString()}
+            </h3>
+          </div>
+          {/* Title */}
+          <h3 className="mb-6 text-6xl sm:mx-8 sm:text-[5rem]">{post.title}</h3>
+          {/* Main image */}
+          <div className="relative h-80 w-full">
+            <Image
+              src={urlFor(post.mainImage).url()}
+              layout="fill"
+              objectFit="cover"
+              objectPosition={post.imagePosition}
+              alt="blog post main image"
+            />
+          </div>
+          {/* Body */}
+          <div className="mx-auto mb-24 max-w-2xl ">
+            <PortableText
+              dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
+              projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
+              content={post.body}
+              serializers={{
+                h1: (props: any) => (
+                  <h1 className="text2xl my-5 font-bold" {...props} />
+                ),
+                h2: (props: any) => (
+                  <h2 className="my-5 text-xl font-bold" {...props} />
+                ),
+                li: ({ children }: any) => (
+                  <li className="ml-4 list-disc">{children}</li>
+                ),
+                link: ({ href, children }: any) => (
+                  <a href={href} className="text-blue-500 hover:underline">
+                    {children}
+                  </a>
+                ),
+              }}
+            />
+          </div>
           <CommentSection />
-        </div>
+        </article>
 
         <Sidebar posts={sidebarPosts} />
       </div>

@@ -42,7 +42,7 @@ const BlogPreview = ({
         </div>
       </Link>
 
-      <div className="space-y-4">
+      <article className="space-y-4">
         <p className="text-sm">
           11 December 2021
           {/* {date} */}
@@ -54,7 +54,7 @@ const BlogPreview = ({
         </Link>
         <p className="">{description}</p>
         <MoreButton buttonText={moreButtonText} more={navigateToPost} />
-      </div>
+      </article>
     </div>
   )
 }
