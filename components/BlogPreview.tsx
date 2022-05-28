@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { Post } from '../typings'
 import { urlFor } from '../sanity'
+import { dayInTheLife, webDevelopment } from '../utils/universalVariables'
 
 interface Props extends Post {
   priority: boolean
@@ -23,7 +24,7 @@ const BlogPreview = ({
   priority,
 }: Props) => {
   const routeCategory =
-    category === 'webDevelopment' ? 'web-development' : 'day-in-the-life'
+    category === webDevelopment.name ? webDevelopment.slug : dayInTheLife.slug
   const navigateToPost = `/${routeCategory}/${slug.current}`
   const moreButtonText = 'read more'
 

@@ -5,6 +5,7 @@ import BackButton from '../../components/BackButton'
 import BlogPreview from '../../components/BlogPreview'
 import { sanityClient } from '../../sanity'
 import { Post } from '../../typings'
+import { revalidateValue, webDevelopment } from '../../utils/universalVariables'
 
 interface Props {
   posts: Post[]
@@ -42,7 +43,7 @@ const WebDevelopment = ({ posts }: Props) => {
 export default WebDevelopment
 
 export const getStaticProps: GetStaticProps = async () => {
-  const query = groq`*[_type == "post" && category == 'webDevelopment']{
+  const query = groq`*[_type == "post" && category == '${webDevelopment.name}']{
   _id,
   _createdAt,
   title,
@@ -65,6 +66,6 @@ imagePosition
     props: {
       posts,
     },
-    revalidate: 3600,
+    revalidate: revalidateValue,
   }
 }

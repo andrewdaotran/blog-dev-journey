@@ -8,6 +8,7 @@ import CommentSection from '../../components/CommentSection'
 import Sidebar from '../../components/Sidebar'
 import { sanityClient, urlFor } from '../../sanity'
 import { Post, Slug } from '../../typings'
+import { dayInTheLife, revalidateValue } from '../../utils/universalVariables'
 
 interface Props {
   post: Post
@@ -15,8 +16,8 @@ interface Props {
 }
 
 const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
-  const navigateBackTo = `/day-in-the-life`
-  const navigateWords = 'day in the life'
+  const navigateBackTo = `/${dayInTheLife.slug}`
+  const navigateWords = dayInTheLife.lowerCaseTitle
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
@@ -103,7 +104,6 @@ export default BlogPostDayInTheLife
 // Backend
 
 export const getStaticPaths = async () => {
-  const category = 'dayInTheLife'
   const query = groq`*[_type == "post" && category == $category]{
   _id,
 slug {
@@ -111,7 +111,9 @@ slug {
 },
 } | order(_createdAt desc)`
 
-  const slugs: Slug[] = await sanityClient.fetch(query, { category })
+  const slugs: Slug[] = await sanityClient.fetch(query, {
+    category: dayInTheLife.name,
+  })
 
   const paths = slugs.map((post: Slug) => {
     return {
@@ -128,8 +130,6 @@ slug {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const category = 'dayInTheLife'
-
   const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
   _id,
   _createdAt,
@@ -169,7 +169,7 @@ imagePosition
   const post = await sanityClient.fetch(postQuery, { slug: params?.blogPost })
 
   const sidebarPosts = await sanityClient.fetch(sidebarPostsQuery, {
-    category,
+    category: dayInTheLife.name,
     slug: params?.blogPost,
   })
 
@@ -184,6 +184,6 @@ imagePosition
       post,
       sidebarPosts,
     },
-    revalidate: 3600,
+    revalidate: revalidateValue,
   }
 }

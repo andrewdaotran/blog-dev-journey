@@ -1,5 +1,6 @@
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
 import { MailIcon } from '@heroicons/react/solid'
+import { webDevelopment, dayInTheLife } from '../utils/universalVariables'
 
 import Link from 'next/link'
 
@@ -59,9 +60,14 @@ const HeaderFooter = ({ children }: Props) => {
                   about me
                 </a>
               </Link>
-              <Link href="/blog" className="">
+              <Link href={`/${webDevelopment.slug}`} className="">
                 <a className="max-w-fit transition ease-in-out hover:text-gamboge">
-                  blog
+                  web development
+                </a>
+              </Link>
+              <Link href={`/${dayInTheLife.slug}`} className="">
+                <a className="max-w-fit transition ease-in-out hover:text-gamboge">
+                  day in the life
                 </a>
               </Link>
               <Link href="/contact" className="">

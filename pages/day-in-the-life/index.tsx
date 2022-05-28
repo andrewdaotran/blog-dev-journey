@@ -5,6 +5,7 @@ import BackButton from '../../components/BackButton'
 import BlogPreview from '../../components/BlogPreview'
 import { sanityClient } from '../../sanity'
 import { Post } from '../../typings'
+import { dayInTheLife, revalidateValue } from '../../utils/universalVariables'
 
 interface Props {
   posts: Post[]
@@ -43,7 +44,7 @@ const DayInTheLife = ({ posts }: Props) => {
 export default DayInTheLife
 
 export const getStaticProps: GetStaticProps = async () => {
-  const query = groq`*[_type == "post" && category == 'dayInTheLife']{
+  const query = groq`*[_type == "post" && category == '${dayInTheLife.name}']{
   _id,
   _createdAt,
   title,
@@ -66,6 +67,6 @@ imagePosition
     props: {
       posts,
     },
-    revalidate: 3600,
+    revalidate: revalidateValue,
   }
 }

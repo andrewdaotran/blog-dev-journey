@@ -7,6 +7,11 @@ import Hero from '../components/Hero'
 import { MoreButton } from '../components/MoreButton'
 import { sanityClient } from '../sanity'
 import { Post } from '../typings'
+import {
+  dayInTheLife,
+  revalidateValue,
+  webDevelopment,
+} from '../utils/universalVariables'
 
 interface Props {
   webDevelopmentPosts: Post[]
@@ -14,9 +19,9 @@ interface Props {
 }
 
 const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
-  const navigateToWebDevelopment = `/web-development`
+  const navigateToWebDevelopment = `/${webDevelopment.slug}`
 
-  const navigateToDayInTheLife = `/day-in-the-life`
+  const navigateToDayInTheLife = `/${dayInTheLife.slug}`
 
   const buttonText = 'check all'
   return (
@@ -38,8 +43,7 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
             <div className=" flex h-fit flex-col space-y-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
               <Link href={navigateToWebDevelopment}>
                 <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                  web development.
-                  {/* {title} */}
+                  {webDevelopment.lowerCaseTitle}.{/* {title} */}
                 </h3>
               </Link>
               <p className="">
@@ -74,8 +78,7 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
             <div className=" flex h-fit flex-col space-y-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
               <Link href={navigateToDayInTheLife}>
                 <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                  day in the life.
-                  {/* {title} */}
+                  {dayInTheLife.lowerCaseTitle}.{/* {title} */}
                 </h3>
               </Link>
               <p className="">
@@ -125,12 +128,12 @@ imagePosition
 } | order(_createdAt desc) [0...2]`
 
   const webDevelopmentPosts = await sanityClient.fetch(postsQuery, {
-    category: 'webDevelopment',
+    category: webDevelopment.name,
   })
   // const webDevelopmentPosts = await sanityClient.fetch(webQuery)
 
   const dayInTheLifePosts = await sanityClient.fetch(postsQuery, {
-    category: 'dayInTheLife',
+    category: dayInTheLife.name,
   })
 
   return {
@@ -138,6 +141,6 @@ imagePosition
       webDevelopmentPosts,
       dayInTheLifePosts,
     },
-    revalidate: 3600,
+    revalidate: revalidateValue,
   }
 }

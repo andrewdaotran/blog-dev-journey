@@ -8,6 +8,7 @@ import CommentSection from '../../components/CommentSection'
 import Sidebar from '../../components/Sidebar'
 import { sanityClient, urlFor } from '../../sanity'
 import { Post, Slug } from '../../typings'
+import { revalidateValue, webDevelopment } from '../../utils/universalVariables'
 
 interface Props {
   post: Post
@@ -15,8 +16,8 @@ interface Props {
 }
 
 const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
-  const navigateBackTo = `/web-development`
-  const navigateWords = 'web development'
+  const navigateBackTo = `/${webDevelopment.slug}`
+  const navigateWords = webDevelopment.lowerCaseTitle
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
@@ -65,7 +66,7 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
             />
           </div>
           {/* Body */}
-          <div className="mx-auto mb-24 max-w-2xl ">
+          <div className="mx-auto mb-24 max-w-2xl border">
             <PortableText
               dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
               projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
@@ -102,7 +103,6 @@ export default BlogPostWebDev
 // Backend
 
 export const getStaticPaths = async () => {
-  const category = 'webDevelopment'
   const query = groq`*[_type == "post" && category == $category]{
   _id,
 slug {
@@ -110,7 +110,9 @@ slug {
 },
 } | order(_createdAt desc)`
 
-  const slugs: Slug[] = await sanityClient.fetch(query, { category })
+  const slugs: Slug[] = await sanityClient.fetch(query, {
+    category: webDevelopment.name,
+  })
 
   const paths = slugs.map((post: Slug) => {
     return {
@@ -127,8 +129,6 @@ slug {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const category = 'webDevelopment'
-
   const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
   _id,
   _createdAt,
@@ -168,7 +168,7 @@ imagePosition
   const post = await sanityClient.fetch(postQuery, { slug: params?.blogPost })
 
   const sidebarPosts = await sanityClient.fetch(sidebarPostsQuery, {
-    category,
+    category: webDevelopment.name,
     slug: params?.blogPost,
   })
 
@@ -183,6 +183,6 @@ imagePosition
       post,
       sidebarPosts,
     },
-    revalidate: 3600,
+    revalidate: revalidateValue,
   }
 }

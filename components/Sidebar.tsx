@@ -14,10 +14,6 @@ const Sidebar = ({ posts }: Props) => {
       {posts.map((post: Post) => {
         return <RecentPost {...post} key={post._id} />
       })}
-
-      {/* // <RecentPost />
-      // <RecentPost />
-      // <RecentPost /> */}
     </div>
   )
 }
