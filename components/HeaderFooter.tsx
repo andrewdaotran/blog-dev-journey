@@ -14,7 +14,7 @@ const HeaderFooter = ({ children }: Props) => {
       <header className=" mb-16 bg-cultured">
         <div className="mx-auto  flex max-w-7xl  justify-between py-5 px-16">
           <Link href="/">
-            <a className="">Logo</a>
+            <a className="">ndru.</a>
           </Link>
           <h1 className="hidden sm:inline-flex">
             <span className="pr-2">(415) 810.9777</span> /{' '}

@@ -3,11 +3,12 @@ import { sanityClient } from '../../sanity'
 import { Slug } from '../../typings'
 import { groq } from 'next-sanity'
 
-const postsQuery = groq`*[_type == "post"]{
+const postsQuery = groq`*[_type == "post" && category == 'webDevelopment']{
   _id,
 slug {
   current
 },
+category
 } | order(_createdAt desc)`
 
 type Data = {

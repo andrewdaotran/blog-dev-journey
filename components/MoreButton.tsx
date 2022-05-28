@@ -7,13 +7,13 @@ interface Props {
 }
 export function MoreButton({ buttonText, more }: Props) {
   return (
-    <div className=" group flex w-fit cursor-pointer items-center space-x-4 ">
-      <Link href={more}>
+    <Link href={more}>
+      <div className=" group flex w-fit cursor-pointer items-center space-x-4 ">
         <a className="font-bold transition ease-in-out group-hover:text-gamboge">
           {buttonText}
         </a>
-      </Link>
-      <ArrowCircleRightIcon className="h-4 w-4 transition ease-in-out group-hover:text-gamboge" />
-    </div>
+        <ArrowCircleRightIcon className="h-4 w-4 transition ease-in-out group-hover:text-gamboge" />
+      </div>
+    </Link>
   )
 }

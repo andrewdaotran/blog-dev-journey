@@ -1,44 +1,65 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
+import { urlFor } from '../sanity'
+import { Post } from '../typings'
 import { MoreButton } from './MoreButton'
 
-interface Props {
-  // image:
-  // date:
-  title: string
-  description: string
-}
+interface Props extends Post {}
 
-const RecentPost = () => {
+const RecentPost = ({
+  _createdAt,
+  _id,
+  author,
+  body,
+  description,
+  slug,
+  title,
+  mainImage,
+  category,
+  imagePosition,
+}: Props) => {
+  // const routeCategory =
+  //   category === 'webDevelopment'
+  //     ? 'web-development'
+  //     : category === 'dayInTheLife'
+  //     ? 'day-in-the-life'
+  //     : null
+  const routeCategory =
+    category === 'webDevelopment' ? 'web-development' : 'day-in-the-life'
+  const navigateToPost = `/${routeCategory}/${slug.current}`
+  const moreButtonText = 'read more'
+
   return (
     <div className="ml-6 mr-4 grid  gap-2 border-b-2 border-black py-8">
       <div className={`  relative h-14  w-14`}>
-        {/* ${imagePosition} */}
         <Image
-          src="/robert.jpg"
+          src={urlFor(mainImage).url()}
+          // src={urlFor(author.image).url()}
           layout="fill"
           objectFit="cover"
-          objectPosition="top"
-          // src={`${image}`}
-          alt=""
+          objectPosition={imagePosition}
+          alt="blog post main image"
           className="rounded-full"
-
-          // ${imagePosition}
         />
       </div>
+
       <p className="text-sm">
         11 December 2021
         {/* {date} */}
       </p>
-      <h3 className="pb-2 text-2xl">
-        Lorem, ipsum dolor.
-        {/* {title} */}
-      </h3>
+      <Link href={navigateToPost}>
+        <h3 className="w-fit cursor-pointer pb-2 text-2xl transition ease-in-out hover:text-gamboge">
+          {/* Lorem, ipsum dolor. */}
+          {title}
+        </h3>
+      </Link>
       <p className=" pb-2">
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam ut illo
-        ad reiciendis quidem dignissimos?
+        {/* Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam ut illo
+        ad reiciendis quidem dignissimos? */}
+        {description}
       </p>
-      <MoreButton buttonText="read more" more="/blog-posts/h" />
+      <MoreButton buttonText={moreButtonText} more={navigateToPost} />
     </div>
   )
 }

@@ -1,16 +1,12 @@
-import { MoreButton } from './MoreButton'
-
 import React from 'react'
+import { MoreButton } from './MoreButton'
+import Link from 'next/link'
 import Image from 'next/image'
 import { Post } from '../typings'
 import { urlFor } from '../sanity'
 
-interface Props {
-  title: string
-  description: string
-  readMore: () => {}
-  date: string
-  imagePosition: string
+interface Props extends Post {
+  priority: boolean
 }
 
 const BlogPreview = ({
@@ -24,41 +20,40 @@ const BlogPreview = ({
   mainImage,
   category,
   imagePosition,
-}: Post) => {
-  console.log(mainImage)
+  priority,
+}: Props) => {
+  const routeCategory =
+    category === 'webDevelopment' ? 'web-development' : 'day-in-the-life'
+  const navigateToPost = `/${routeCategory}/${slug.current}`
+  const moreButtonText = 'read more'
+
   return (
     <div className=" space-y-4 ">
-      <div className={`  relative h-[23rem]  w-full`}>
-        <Image
-          src="/robert.jpg"
-          // src={urlFor(mainImage).width(600).url()}
-          layout="fill"
-          objectFit="cover"
-          objectPosition={imagePosition}
-          // src={`${image}`}
-          alt=""
-        />
-      </div>
+      <Link href={navigateToPost}>
+        <div className={`  relative h-[23rem]  w-full cursor-pointer`}>
+          <Image
+            src={urlFor(mainImage).url()}
+            layout="fill"
+            objectFit="cover"
+            objectPosition={imagePosition}
+            alt="blog post main image"
+            priority={priority}
+          />
+        </div>
+      </Link>
 
       <div className="space-y-4">
         <p className="text-sm">
           11 December 2021
           {/* {date} */}
         </p>
-        <h3 className="text-3xl font-bold">
-          {/* Photo Model */}
-          {title}
-        </h3>
-        <p className="">
-          {/* Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus
-          cum at ab necessitatibus nisi maxime molestias possimus doloribus
-          ducimus illum! */}
-          {description}
-        </p>
-        <MoreButton
-          buttonText="read more"
-          more={`/blog-posts/${slug.current}`}
-        />
+        <Link href={navigateToPost}>
+          <h3 className="black w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
+            {title}
+          </h3>
+        </Link>
+        <p className="">{description}</p>
+        <MoreButton buttonText={moreButtonText} more={navigateToPost} />
       </div>
     </div>
   )
