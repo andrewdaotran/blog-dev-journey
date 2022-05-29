@@ -4,6 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import PortableText from 'react-portable-text'
 import BackButton from '../../components/BackButton'
+import CommentForm from '../../components/CommentForm'
 import CommentSection from '../../components/CommentSection'
 import Sidebar from '../../components/Sidebar'
 import { sanityClient, urlFor } from '../../sanity'
@@ -18,6 +19,17 @@ interface Props {
 const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
   const navigateBackTo = `/${dayInTheLife.slug}`
   const navigateWords = dayInTheLife.lowerCaseTitle
+  const serializers = {
+    h1: (props: any) => <h1 className="text2xl my-5 font-bold" {...props} />,
+    h2: (props: any) => <h2 className="my-5 text-xl font-bold" {...props} />,
+    li: ({ children }: any) => <li className="ml-4 list-disc">{children}</li>,
+    link: ({ href, children }: any) => (
+      <a href={href} className="text-blue-500 hover:underline">
+        {children}
+      </a>
+    ),
+  }
+
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
@@ -72,25 +84,11 @@ const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
               dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
               projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
               content={post.body}
-              serializers={{
-                h1: (props: any) => (
-                  <h1 className="text2xl my-5 font-bold" {...props} />
-                ),
-                h2: (props: any) => (
-                  <h2 className="my-5 text-xl font-bold" {...props} />
-                ),
-                li: ({ children }: any) => (
-                  <li className="ml-4 list-disc">{children}</li>
-                ),
-                link: ({ href, children }: any) => (
-                  <a href={href} className="text-blue-500 hover:underline">
-                    {children}
-                  </a>
-                ),
-              }}
+              serializers={serializers}
             />
           </div>
-          <CommentSection />
+          <CommentForm postId={post._id} />
+          <CommentSection comments={post.comments} />
         </article>
 
         <Sidebar posts={sidebarPosts} />
@@ -145,7 +143,9 @@ slug {
 },
 body,
 category,
-imagePosition
+imagePosition,
+"comments": *[_type == "comment" && post._ref == ^._id &&
+  approved == true ] | order(_createdAt desc),
 } `
 
   const sidebarPostsQuery = groq`*[_type == "post" && category == $category && slug.current != $slug] {

@@ -1,29 +1,20 @@
 import React from 'react'
+import { CommentType } from '../typings'
 
 interface Props {
-  name: string
-  // date:
-  comment: string
+  comment: CommentType
 }
 
-const Comment = () => {
+const Comment = ({ comment }: Props) => {
   return (
     <div className=" border-b  pb-4">
       <div className="mb-2 grid grid-cols-2 font-bold">
-        <h3 className="cols-span-1 text-gamboge">
-          Andrew Tran
-          {/* {name} */}
-        </h3>
+        <h3 className="cols-span-1 text-gamboge">{comment.name}</h3>
         <p className="cols-span-1 justify-self-end">
-          11 December 2021
-          {/* {date} */}
+          {new Date(comment._createdAt).toLocaleString()}
         </p>
       </div>
-      <p className="">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam laborum
-        perspiciatis cupiditate voluptatem, aliquam amet.
-        {/* {comment} */}
-      </p>
+      <p className="">{comment.comment}</p>
     </div>
   )
 }

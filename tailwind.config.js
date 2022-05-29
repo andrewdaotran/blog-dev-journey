@@ -14,6 +14,7 @@ module.exports = {
         cultured: '#F0F0F0',
         gamboge: '#E09D37',
         quickSilver: '#A2A2A2',
+        gambogeLight: '#e5ac57',
       },
     },
   },
