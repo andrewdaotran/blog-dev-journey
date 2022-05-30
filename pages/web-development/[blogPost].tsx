@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { GetStaticProps } from 'next'
 import { groq } from 'next-sanity'
 import Image from 'next/image'
@@ -29,19 +30,18 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
       </a>
     ),
   }
+  const date = format(new Date(post._createdAt), `dd MMMM yyyy / K:mm`)
+
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
       <div className="mx-auto max-w-7xl md:grid md:grid-cols-3">
-        <article className="mr-6 md:col-span-2">
+        <article
+          className={`${sidebarPosts.length > 0 ? `mr-6` : null} md:col-span-2`}
+        >
+          {/* Date */}
           <p className="mx-auto mb-6  font-extralight">
-            <span className="text-gray-400">published at</span>{' '}
-            {`${new Date(post._createdAt).getDate()} ${new Date(
-              post._createdAt
-            ).toLocaleString('en-US', { month: 'long' })} ${new Date(
-              post._createdAt
-            ).getFullYear()} / `}
-            {/* 11 December 2021 / 3:41 pm */}
+            <span className="text-gray-400">published on</span> {`${date} / `}
           </p>
           {/* Author bubble, name, and date div */}
           <div className="flex items-center space-x-2">
@@ -56,12 +56,10 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
                 className="rounded-full"
               />
             </div>
-            {/* Author name and date */}
+            {/* Author  */}
             <h3 className="text-sm font-extralight">
               <span className="text-gray-400">written by </span>
-              {post.author.name.toLowerCase()}{' '}
-              <span className="text-gray-400">- published at</span>{' '}
-              {new Date(post._createdAt).toLocaleString()}
+              {post.author.name.toLowerCase()}
             </h3>
           </div>
           {/* Title */}
@@ -89,7 +87,7 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
           <CommentSection comments={post.comments} />
         </article>
 
-        <Sidebar posts={sidebarPosts} />
+        {sidebarPosts.length > 0 && <Sidebar posts={sidebarPosts} />}
       </div>
     </div>
   )

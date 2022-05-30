@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { GetStaticProps } from 'next'
 import { groq } from 'next-sanity'
 import Image from 'next/image'
@@ -30,20 +31,23 @@ const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
     ),
   }
 
+  const date = format(new Date(post._createdAt), 'dd MMMM yyyy')
+
   return (
     <div className="mx-6 my-12">
       <BackButton backRoute={navigateBackTo} buttonText={navigateWords} />
-      <div className="mx-auto max-w-7xl md:grid md:grid-cols-3">
-        <article className="mr-6 md:col-span-2">
+      <div
+        className={`mx-auto max-w-7xl ${
+          sidebarPosts.length > 0 ? `md:grid md:grid-cols-3` : null
+        } `}
+      >
+        <article
+          className={`${sidebarPosts.length > 0 ? `mr-6` : null} md:col-span-2`}
+        >
           {/* Date */}
           <p className="mx-auto mb-6  font-extralight">
-            <span className="text-gray-400">published at</span>{' '}
-            {`${new Date(post._createdAt).getDate()} ${new Date(
-              post._createdAt
-            ).toLocaleString('en-US', { month: 'long' })} ${new Date(
-              post._createdAt
-            ).getFullYear()} / `}
-            {/* 11 December 2021 / 3:41 pm */}
+            <span className="text-gray-400">published on</span>
+            {` ${date} / `}
           </p>
 
           <div className="flex items-center space-x-2">
@@ -58,7 +62,7 @@ const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
                 className="rounded-full"
               />
             </div>
-            {/* Author name and date */}
+            {/* Author*/}
             <h3 className="text-sm font-extralight">
               <span className="text-gray-400">written by </span>
               {post.author.name.toLowerCase()}
@@ -91,7 +95,7 @@ const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
           <CommentSection comments={post.comments} />
         </article>
 
-        <Sidebar posts={sidebarPosts} />
+        {sidebarPosts.length > 0 && <Sidebar posts={sidebarPosts} />}
       </div>
     </div>
   )
