@@ -11,6 +11,8 @@ import Sidebar from '../../components/Sidebar'
 import { sanityClient, urlFor } from '../../sanity'
 import { Post, Slug } from '../../typings'
 import { revalidateValue, webDevelopment } from '../../utils/universalVariables'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 
 interface Props {
   post: Post
@@ -30,7 +32,13 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
       </a>
     ),
   }
-  const date = format(new Date(post._createdAt), `dd MMMM yyyy / K:mm`)
+  const date = format(new Date(post._createdAt), `dd MMMM yyyy`)
+
+  TimeAgo.addDefaultLocale(en)
+
+  const timeAgo = new TimeAgo('en-US')
+
+  const dateAgo = timeAgo.format(new Date(post._createdAt), 'round')
 
   return (
     <div className="mx-6 my-12">
@@ -41,7 +49,7 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
         >
           {/* Date */}
           <p className="mx-auto mb-6  font-extralight">
-            <span className="text-gray-400">published on</span> {`${date} / `}
+            <span className="text-gray-400">published on</span> {`${date}`}
           </p>
           {/* Author bubble, name, and date div */}
           <div className="flex items-center space-x-2">
@@ -60,6 +68,7 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
             <h3 className="text-sm font-extralight">
               <span className="text-gray-400">written by </span>
               {post.author.name.toLowerCase()}
+              <span className="text-gray-400"> - {dateAgo}</span>
             </h3>
           </div>
           {/* Title */}

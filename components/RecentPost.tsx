@@ -6,6 +6,8 @@ import { urlFor } from '../sanity'
 import { Post } from '../typings'
 import { dayInTheLife, webDevelopment } from '../utils/universalVariables'
 import { MoreButton } from './MoreButton'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 
 interface Props extends Post {}
 
@@ -17,7 +19,13 @@ const RecentPost = (post: Props) => {
   const navigateToPost = `/${routeCategory}/${post.slug.current}`
   const moreButtonText = 'read more'
 
-  const date = format(new Date(post._createdAt), 'dd MMMM yyyy')
+  // const date = format(new Date(post._createdAt), 'dd MMMM yyyy')
+
+  TimeAgo.addDefaultLocale(en)
+
+  const timeAgo = new TimeAgo('en-US')
+
+  const date = timeAgo.format(new Date(post._createdAt), 'round')
 
   return (
     <div className="ml-6 mr-4 grid  gap-2 border-b-2 border-black py-8">
