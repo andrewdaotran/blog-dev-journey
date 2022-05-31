@@ -32,15 +32,16 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
       </Head>
 
       <Hero />
+
       {/* Web Development */}
       <div className="mx-auto max-w-7xl">
-        <div className="mx-6 my-12">
+        <div className="mx-6 my-12 ">
           {/* container including margin bottom */}
           <div
-            className={`mx-auto grid  max-w-7xl gap-8 border-b-2 border-black pb-12 md:grid-cols-3  `}
+            className={`grid max-w-7xl gap-y-8 border-b-2 border-black pb-12 md:grid-cols-3 md:gap-x-8 `}
           >
             {/* Blog Content Single Box */}
-            <div className=" flex h-fit flex-col space-y-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
+            <div className=" grid h-fit gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs">
               <Link href={navigateToWebDevelopment}>
                 <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
                   {webDevelopment.lowerCaseTitle}.{/* {title} */}
@@ -48,7 +49,10 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
               </Link>
               <p className="">
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-                veritatis eveniet necessitatibus quod aut! Ipsa!
+                veritatis eveniet necessitatibus quod aut! Ipsa! Lorem ipsum
+                dolor sit amet, consectetur adipisicing elit. Obcaecati nulla
+                impedit voluptates nam voluptatem veritatis reiciendis, earum
+                perferendis similique delectus!
                 {/* {description} */}
               </p>
               <MoreButton
@@ -57,7 +61,7 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
               />
             </div>
             {/* Array of blog posts */}
-            <div className="col-span-2 grid grid-cols-1 gap-4  sm:grid-cols-2 ">
+            <div className="col-span-2 grid grid-cols-1 gap-4 sm:grid-cols-2 ">
               {webDevelopmentPosts.map((post: Post) => {
                 return <BlogPreview {...post} key={post._id} priority={true} />
               })}
@@ -68,14 +72,14 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
       {/* Web Development End */}
 
       {/* Day In The Life */}
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-6 my-12">
+      <div className="mx-auto max-w-7xl ">
+        <div className="mx-6 my-12 border">
           {/* container including margin bottom */}
           <div
-            className={`mx-auto grid  max-w-7xl gap-8  pb-12 md:grid-cols-3  `}
+            className={` grid  max-w-7xl gap-y-8 pb-12  md:grid-cols-3 md:gap-x-8  `}
           >
             {/* Blog Content Single Box */}
-            <div className=" flex h-fit flex-col space-y-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
+            <div className=" grid h-fit  gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
               <Link href={navigateToDayInTheLife}>
                 <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
                   {dayInTheLife.lowerCaseTitle}.{/* {title} */}

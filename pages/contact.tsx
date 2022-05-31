@@ -1,18 +1,16 @@
 import Image from 'next/image'
-
-import React, { useRef, useState } from 'react'
 import EmailClipboard from '../components/EmailClipboard'
 
 const Contact = () => {
   return (
     <div className="mx-auto max-w-7xl">
-      <div className="mx-6">
+      <div className="mx-6 border">
         <div className="  grid max-w-7xl pb-12 md:grid-cols-3">
           {/*  */}
-          <div className=" flex flex-col   md:col-span-1 ">
+          <div className=" grid  md:col-span-1 ">
             <h1 className="text-6xl sm:text-[5rem]  ">contact.</h1>
             {/* Box */}
-            <div className="mt-12 grid gap-4 border-2 border-black p-6">
+            <div className="mt-12 grid gap-4 border-2 border-black p-8">
               <div className={`  relative h-16 w-16`}>
                 <Image
                   src={'/thuvinh.jpg'}
