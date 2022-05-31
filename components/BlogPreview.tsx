@@ -5,6 +5,9 @@ import Image from 'next/image'
 import { Post } from '../typings'
 import { urlFor } from '../sanity'
 import { dayInTheLife, webDevelopment } from '../utils/universalVariables'
+import { format } from 'date-fns'
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
 
 interface Props extends Post {
   priority: boolean
@@ -28,6 +31,15 @@ const BlogPreview = ({
   const navigateToPost = `/${routeCategory}/${slug.current}`
   const moreButtonText = 'read more'
 
+  const date = format(new Date(_createdAt), 'dd MMMM yyyy')
+
+  TimeAgo.setDefaultLocale(en.locale)
+  TimeAgo.addLocale(en)
+
+  const timeAgo = new TimeAgo('en-US')
+
+  const dateAgo = timeAgo.format(new Date(_createdAt), 'round')
+
   return (
     <div className=" space-y-4 ">
       <Link href={navigateToPost}>
@@ -45,8 +57,7 @@ const BlogPreview = ({
 
       <article className="space-y-4">
         <p className="text-sm">
-          11 December 2021
-          {/* {date} */}
+          {date} <span className="text-gray-400"> - {dateAgo}</span>
         </p>
         <Link href={navigateToPost}>
           <h3 className="black w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">

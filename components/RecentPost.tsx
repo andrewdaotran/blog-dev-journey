@@ -19,13 +19,14 @@ const RecentPost = (post: Props) => {
   const navigateToPost = `/${routeCategory}/${post.slug.current}`
   const moreButtonText = 'read more'
 
-  // const date = format(new Date(post._createdAt), 'dd MMMM yyyy')
+  const date = format(new Date(post._createdAt), 'dd MMMM yyyy')
 
-  TimeAgo.addDefaultLocale(en)
+  TimeAgo.setDefaultLocale(en.locale)
+  TimeAgo.addLocale(en)
 
   const timeAgo = new TimeAgo('en-US')
 
-  const date = timeAgo.format(new Date(post._createdAt), 'round')
+  const dateAgo = timeAgo.format(new Date(post._createdAt), 'round')
 
   return (
     <div className="ml-6 mr-4 grid  gap-2 border-b-2 border-black py-8">
@@ -41,7 +42,9 @@ const RecentPost = (post: Props) => {
         />
       </div>
 
-      <p className="text-sm">{date}</p>
+      <p className="text-sm">
+        {date} <span className="text-gray-400"> - {dateAgo}</span>
+      </p>
       <Link href={navigateToPost}>
         <h3 className="w-fit cursor-pointer pb-2 text-2xl transition ease-in-out hover:text-gamboge">
           {post.title}

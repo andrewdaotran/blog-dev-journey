@@ -34,7 +34,8 @@ const BlogPostWebDev = ({ post, sidebarPosts }: Props) => {
   }
   const date = format(new Date(post._createdAt), `dd MMMM yyyy`)
 
-  TimeAgo.addDefaultLocale(en)
+  TimeAgo.setDefaultLocale(en.locale)
+  TimeAgo.addLocale(en)
 
   const timeAgo = new TimeAgo('en-US')
 

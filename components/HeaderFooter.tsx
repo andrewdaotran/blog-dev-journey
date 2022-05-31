@@ -1,14 +1,34 @@
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
 import { MailIcon } from '@heroicons/react/solid'
 import { webDevelopment, dayInTheLife } from '../utils/universalVariables'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import Link from 'next/link'
+import { useState } from 'react'
 
 interface Props {
   children: React.ReactNode
 }
 
+interface Clipboard {
+  value: string
+  copied: boolean
+}
+
 const HeaderFooter = ({ children }: Props) => {
+  const [clipboard, setClipboard] = useState<Clipboard>({
+    value: 'andrewdaotran@gmail.com',
+    copied: false,
+  })
+  const onCopy = () => {
+    setClipboard({ ...clipboard, copied: true })
+  }
+
+  const clipboardCopiedMessage = () => {
+    setTimeout(() => {
+      setClipboard({ ...clipboard, copied: false })
+    }, 2000)
+  }
   return (
     <>
       {/* header */}
@@ -79,12 +99,23 @@ const HeaderFooter = ({ children }: Props) => {
           </div>
         </div>
         {/* email div */}
-        <div className=" flex  items-center justify-center space-x-2 pb-14 text-center text-white">
+        <div className=" relative  flex items-center justify-center space-x-2 pb-14 text-center text-white">
           {/* <Mail /> */}
           <MailIcon className=" h-4  w-4 text-gamboge " />
-          <h3 className="transition ease-in-out hover:cursor-pointer hover:text-gamboge">
-            andrewdaotran@gmail.com
-          </h3>
+          <CopyToClipboard text={clipboard.value} onCopy={onCopy}>
+            <h3
+              className="transition ease-in-out hover:cursor-pointer hover:text-gamboge"
+              onClick={clipboardCopiedMessage}
+            >
+              andrewdaotran@gmail.com
+            </h3>
+          </CopyToClipboard>
+
+          {clipboard.copied ? (
+            <p className=" absolute top-[-30px] right-[45%] rounded-md bg-gamboge px-2 py-1 text-white">
+              copied!
+            </p>
+          ) : null}
         </div>
       </footer>
     </>
