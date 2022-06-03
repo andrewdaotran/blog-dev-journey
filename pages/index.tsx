@@ -35,37 +35,32 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
 
       {/* Web Development */}
       <div className="mx-auto max-w-7xl">
-        <div className="mx-6 my-12 ">
-          {/* container including margin bottom */}
-          <div
-            className={`grid max-w-7xl gap-y-8 border-b-2 border-black pb-12 md:grid-cols-3 md:gap-x-8 `}
-          >
-            {/* Blog Content Single Box */}
-            <div className=" grid h-fit gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs">
-              <Link href={navigateToWebDevelopment}>
-                <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                  {webDevelopment.lowerCaseTitle}.{/* {title} */}
-                </h3>
-              </Link>
-              <p className="">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-                veritatis eveniet necessitatibus quod aut! Ipsa! Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit. Obcaecati nulla
-                impedit voluptates nam voluptatem veritatis reiciendis, earum
-                perferendis similique delectus!
-                {/* {description} */}
-              </p>
-              <MoreButton
-                buttonText={buttonText}
-                more={navigateToWebDevelopment}
-              />
-            </div>
-            {/* Array of blog posts */}
-            <div className="col-span-2 grid grid-cols-1 gap-4 sm:grid-cols-2 ">
-              {webDevelopmentPosts.map((post: Post) => {
-                return <BlogPreview {...post} key={post._id} priority={true} />
-              })}
-            </div>
+        <div className="mx-6 my-12 grid max-w-7xl gap-y-8 border-b-2 border-black pb-12 md:grid-cols-3 md:gap-x-8 ">
+          {/* Blog Content Single Box */}
+          <div className=" grid h-fit gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs">
+            <Link href={navigateToWebDevelopment}>
+              <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
+                {webDevelopment.lowerCaseTitle}.{/* {title} */}
+              </h3>
+            </Link>
+            <p className="">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
+              veritatis eveniet necessitatibus quod aut! Ipsa! Lorem ipsum dolor
+              sit amet, consectetur adipisicing elit. Obcaecati nulla impedit
+              voluptates nam voluptatem veritatis reiciendis, earum perferendis
+              similique delectus!
+              {/* {description} */}
+            </p>
+            <MoreButton
+              buttonText={buttonText}
+              more={navigateToWebDevelopment}
+            />
+          </div>
+          {/* Array of blog posts */}
+          <div className="col-span-2 grid grid-cols-1 gap-4 sm:grid-cols-2 ">
+            {webDevelopmentPosts.map((post: Post) => {
+              return <BlogPreview {...post} key={post._id} priority={true} />
+            })}
           </div>
         </div>
       </div>
@@ -73,35 +68,27 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
 
       {/* Day In The Life */}
       <div className="mx-auto max-w-7xl ">
-        <div className="mx-6 my-12 border">
-          {/* container including margin bottom */}
-          <div
-            className={` grid  max-w-7xl gap-y-8 pb-12  md:grid-cols-3 md:gap-x-8  `}
-          >
-            {/* Blog Content Single Box */}
-            <div className=" grid h-fit  gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
-              <Link href={navigateToDayInTheLife}>
-                <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                  {dayInTheLife.lowerCaseTitle}.{/* {title} */}
-                </h3>
-              </Link>
-              <p className="">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-                quasi alias voluptatibus accusantium fuga aut odit repellendus
-                doloremque nostrum a nisi nemo, dolore ipsa voluptatem?
-                {/* {description} */}
-              </p>
-              <MoreButton
-                buttonText={buttonText}
-                more={navigateToDayInTheLife}
-              />
-            </div>
-            {/* Array of blog posts */}
-            <div className="col-span-2 grid grid-cols-1 gap-4  sm:grid-cols-2 ">
-              {dayInTheLifePosts.map((post: Post) => {
-                return <BlogPreview {...post} key={post._id} priority={true} />
-              })}
-            </div>
+        <div className="mx-6 my-12 grid max-w-7xl  gap-y-8  pb-12  md:grid-cols-3 md:gap-x-8 ">
+          {/* Blog Content Single Box */}
+          <div className=" grid h-fit  gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
+            <Link href={navigateToDayInTheLife}>
+              <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
+                {dayInTheLife.lowerCaseTitle}.{/* {title} */}
+              </h3>
+            </Link>
+            <p className="">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+              quasi alias voluptatibus accusantium fuga aut odit repellendus
+              doloremque nostrum a nisi nemo, dolore ipsa voluptatem?
+              {/* {description} */}
+            </p>
+            <MoreButton buttonText={buttonText} more={navigateToDayInTheLife} />
+          </div>
+          {/* Array of blog posts */}
+          <div className="col-span-2 grid grid-cols-1 gap-4  sm:grid-cols-2 ">
+            {dayInTheLifePosts.map((post: Post) => {
+              return <BlogPreview {...post} key={post._id} priority={true} />
+            })}
           </div>
         </div>
       </div>

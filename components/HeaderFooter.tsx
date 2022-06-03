@@ -69,11 +69,11 @@ const HeaderFooter = ({ children }: Props) => {
                   day in the life
                 </a>
               </Link>
-              <Link href="/contact" className="">
+              {/* <Link href="/contact" className="">
                 <a className="max-w-fit transition ease-in-out hover:text-gamboge">
                   contact
                 </a>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>

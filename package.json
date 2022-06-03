@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.6.2",
     "@heroicons/react": "^1.0.6",
     "@portabletext/react": "^1.0.6",
     "@sanity/image-url": "^1.0.1",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@types/node": "17.0.4",
     "@types/react": "17.0.38",
+    "@types/react-copy-to-clipboard": "^5.0.2",
     "autoprefixer": "^10.4.0",
     "axios": "^0.27.2",
     "postcss": "^8.4.5",
