@@ -12,4 +12,4 @@ export const dayInTheLife = {
   slug: 'day-in-the-life',
 }
 
-export const revalidateValue = 3600
+export const revalidateValue = 60

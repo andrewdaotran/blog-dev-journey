@@ -43,3 +43,10 @@ export interface CommentType {
     _type: string
   }
 }
+
+export interface BlogCategory {
+  name: string
+  title: string
+  lowerCaseTitle: string
+  slug: string
+}
