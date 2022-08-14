@@ -24,8 +24,6 @@ const BlogPostDayInTheLife = ({ post, sidebarPosts }: Props) => {
 
 export default BlogPostDayInTheLife
 
-// Backend
-
 export const getStaticPaths = async () => {
   const query = groq`*[_type == "post" && category == $category]{
   _id,
