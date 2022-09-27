@@ -7,11 +7,13 @@ import Hero from '../components/Hero'
 import { MoreButton } from '../components/MoreButton'
 import { sanityClient } from '../sanity'
 import { Post } from '../typings'
+import { revalidateValue } from '../utils/universalVariables'
 import {
   dayInTheLife,
-  revalidateValue,
   webDevelopment,
-} from '../utils/universalVariables'
+  photography1,
+  photography2,
+} from '../utils/blogData'
 
 interface Props {
   webDevelopmentPosts: Post[]
@@ -40,15 +42,11 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
           <div className=" grid h-fit gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs">
             <Link href={navigateToWebDevelopment}>
               <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                {webDevelopment.lowerCaseTitle}.{/* {title} */}
+                {photography1.lowerCaseTitle}.{/* {title} */}
               </h3>
             </Link>
             <p className="">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. In
-              veritatis eveniet necessitatibus quod aut! Ipsa! Lorem ipsum dolor
-              sit amet, consectetur adipisicing elit. Obcaecati nulla impedit
-              voluptates nam voluptatem veritatis reiciendis, earum perferendis
-              similique delectus!
+              {photography1.description}
               {/* {description} */}
             </p>
             <MoreButton
@@ -73,13 +71,11 @@ const Home: NextPage<Props> = ({ webDevelopmentPosts, dayInTheLifePosts }) => {
           <div className=" grid h-fit  gap-6 border-2 border-black p-8 md:col-span-1 md:max-w-xs ">
             <Link href={navigateToDayInTheLife}>
               <h3 className="w-fit cursor-pointer text-3xl font-bold transition ease-in-out hover:text-gamboge">
-                {dayInTheLife.lowerCaseTitle}.{/* {title} */}
+                {photography2.lowerCaseTitle}.{/* {title} */}
               </h3>
             </Link>
             <p className="">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
-              quasi alias voluptatibus accusantium fuga aut odit repellendus
-              doloremque nostrum a nisi nemo, dolore ipsa voluptatem?
+              {photography2.description}
               {/* {description} */}
             </p>
             <MoreButton buttonText={buttonText} more={navigateToDayInTheLife} />

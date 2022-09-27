@@ -5,7 +5,8 @@ import BackButton from '../../components/BackButton'
 import BlogPreview from '../../components/BlogPreview'
 import { sanityClient } from '../../sanity'
 import { Post } from '../../typings'
-import { dayInTheLife, revalidateValue } from '../../utils/universalVariables'
+import { revalidateValue } from '../../utils/universalVariables'
+import { dayInTheLife } from '../../utils/blogData'
 
 interface Props {
   posts: Post[]

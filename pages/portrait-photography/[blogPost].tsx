@@ -3,7 +3,8 @@ import { groq } from 'next-sanity'
 
 import { sanityClient } from '../../sanity'
 import { Post, Slug } from '../../typings'
-import { revalidateValue, webDevelopment } from '../../utils/universalVariables'
+import { revalidateValue } from '../../utils/universalVariables'
+import { webDevelopment } from '../../utils/blogData'
 import SingleBlogPost from '../../components/SingleBlogPost'
 
 interface Props {

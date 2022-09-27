@@ -1,5 +1,11 @@
 import { ArrowCircleRightIcon } from '@heroicons/react/outline'
-import { webDevelopment, dayInTheLife } from '../utils/universalVariables'
+import {
+  webDevelopment,
+  dayInTheLife,
+  footer,
+  photography1,
+  photography2,
+} from '../utils/blogData'
 import Link from 'next/link'
 import EmailClipboard from './EmailClipboard'
 
@@ -30,7 +36,7 @@ const HeaderFooter = ({ children }: Props) => {
           {/* ndru div */}
           <div className="">
             <h2 className="mb-10 text-3xl">ndru.</h2>
-            <p className="mb-4">A look into my software development journey.</p>
+            <p className="mb-4">{footer.description}</p>
             {/* Check All Button Div */}
             <div className=" group flex w-fit cursor-pointer items-center space-x-4 text-gamboge">
               <button
@@ -56,17 +62,17 @@ const HeaderFooter = ({ children }: Props) => {
               </Link>
               <Link href="/about-me" className="">
                 <a className="max-w-fit transition ease-in-out hover:text-gamboge">
-                  about me
+                  {footer.aboutMe.lowerCaseTitle}
                 </a>
               </Link>
-              <Link href={`/${webDevelopment.slug}`} className="">
+              <Link href={`/${photography1.slug}`} className="">
                 <a className="max-w-fit transition ease-in-out hover:text-gamboge">
-                  web development
+                  {photography1.lowerCaseTitle}
                 </a>
               </Link>
-              <Link href={`/${dayInTheLife.slug}`} className="">
+              <Link href={`/${photography2.slug}`} className="">
                 <a className="max-w-fit transition ease-in-out hover:text-gamboge">
-                  day in the life
+                  {photography2.lowerCaseTitle}
                 </a>
               </Link>
             </div>

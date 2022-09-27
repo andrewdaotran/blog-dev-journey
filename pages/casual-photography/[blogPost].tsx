@@ -3,7 +3,8 @@ import { groq } from 'next-sanity'
 
 import { sanityClient } from '../../sanity'
 import { Post, Slug } from '../../typings'
-import { dayInTheLife, revalidateValue } from '../../utils/universalVariables'
+import { revalidateValue } from '../../utils/universalVariables'
+import { dayInTheLife } from '../../utils/blogData'
 
 import SingleBlogPost from '../../components/SingleBlogPost'
 
